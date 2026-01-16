@@ -17,3 +17,7 @@ spec:
     helm:
       valueFiles:
         - staging-values.yaml
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
