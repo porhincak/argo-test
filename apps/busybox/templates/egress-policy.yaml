@@ -1,0 +1,27 @@
+apiVersion: cilium.io/v2
+kind: CiliumEgressGatewayPolicy
+metadata:
+  name: {{ .Chart.Name }}-policy
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-weight": "10"
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  destinationCIDRs:
+    - "10.10.0.0/16"
+    - "185.235.52.139/32"
+  egressGateway:
+    interface: ens4
+    nodeSelector:
+      matchLabels:
+        egress-gateway: enabled
+  egressGateways:
+  - interface: ens4
+    nodeSelector:
+      matchLabels:
+        egress-gateway: enabled
+  selectors:
+    - podSelector:
+        matchLabels:
+          "app.kubernetes.io/instance": {{ .Chart.Name }}
+          "io.kubernetes.pod.namespace": {{ .Chart.Name }}

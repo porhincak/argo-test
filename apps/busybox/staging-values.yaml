@@ -1,0 +1,16 @@
+name: "busybox"
+namespace: "busybox"
+image:
+  repository: "busybox"
+  tag: "latest"
+  pullPolicy: "IfNotPresent"
+replicaCount: 1
+#revisionHistoryLimit: 3 # Default value is set to 3 - uncomment and edit if we need more revisions
+limits:
+  cpu: 1.0
+  memory: 2048Mi
+storages:
+  - name: busybox-test-1
+    size: "1Gi"
+  - name: busybox-test-2
+    size: "1Gi"

@@ -1,0 +1,40 @@
+{{- range .Values.storages }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .name }}
+  namespace: {{ $.Values.namespace }}
+  labels:
+    {{- include "busybox.storage.labels" $ | nindent 4 }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: longhorn-static-retain
+  resources:
+    requests:
+      storage: {{ .size }}
+  volumeName: {{ .name }}-pv
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .name }}-pv
+  annotations:
+    argocd.argoproj.io/sync-wave: "-3"
+spec:
+  capacity:
+    storage: {{ .size }}
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: longhorn-static-retain
+  csi:
+    driver: driver.longhorn.io
+    volumeHandle: {{ .name }}
+    fsType: ext4
+---
+{{- end }}
