@@ -1,3 +1,11 @@
 volumes:
   - name: busybox-test-2
     size: "1Gi"
+    labels:
+      recurring-job-group.longhorn.io/weekly-backups: enabled
+  - name: test1
+    size: "2Gi"
+    labels:
+      -recurring-job-group.longhorn.io/default: enabled
+      recurring-job-group.longhorn.io/daily-snapshot: enabled
+      recurring-job-group.longhorn.io/weekly-backups: enabled
