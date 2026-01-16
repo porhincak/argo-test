@@ -27,7 +27,7 @@ spec:
             - "sh"
             - "-c"
             - |
-              apt-get update; apt-get install -y netcat;
+              apt-get update; apt-get install -y netcat-openbsd;
               while true; do
                 echo -e "HTTP/1.1 200 OK\r\nContent-Length: 13\r\n\r\nHello World\n" | nc -l -p 80
               done
