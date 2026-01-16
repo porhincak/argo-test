@@ -4,7 +4,7 @@ metadata:
   name: ubuntu
   namespace: argocd
   finalizers:
-  - resources-finalizer.argocd.argoproj.io
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: ubuntu
