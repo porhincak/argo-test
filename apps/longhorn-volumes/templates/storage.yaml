@@ -1,0 +1,19 @@
+{{- range .Values.volumes }}
+---
+apiVersion: longhorn.io/v1beta2
+kind: Volume
+metadata:
+  name: {{ .name }}
+  namespace: longhorn-system
+  {{- with .labels }}
+  labels:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  size: "{{ include "sizeToBytes" .size }}"
+  numberOfReplicas: 3
+  frontend: blockdev
+  dataLocality: best-effort
+  accessMode: rwx
+---
+{{- end }}
