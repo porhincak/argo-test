@@ -1,16 +1,16 @@
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "busybox.chart" -}}
+{{- define "ubuntu.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Web labels
 */}}
-{{- define "busybox.labels" -}}
-helm.sh/chart: {{ include "busybox.chart" . }}
-{{ include "busybox.selectorLabels" . }}
+{{- define "ubuntu.labels" -}}
+helm.sh/chart: {{ include "ubuntu.chart" . }}
+{{ include "ubuntu.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -20,21 +20,21 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Web selector labels
 */}}
-{{- define "busybox.selectorLabels" -}}
+{{- define "ubuntu.selectorLabels" -}}
 app.kubernetes.io/name: {{ .Values.name }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/* Storage selector labels */}}
-{{ define "busybox.storage.selectorLabels" -}}
+{{ define "ubuntu.storage.selectorLabels" -}}
 app.kubernetes.io/name: {{ .Values.name }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/* Storage labels */}}
-{{ define "busybox.storage.labels" -}}
-helm.sh/chart: {{ include "busybox.chart" . }}
-{{ include "busybox.storage.selectorLabels" . }}
+{{ define "ubuntu.storage.labels" -}}
+helm.sh/chart: {{ include "ubuntu.chart" . }}
+{{ include "ubuntu.storage.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}

@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.name }}
   namespace: {{ .Chart.Name }}
   labels:
-    {{- include "busybox.labels" . | nindent 4 }}
+    {{- include "ubuntu.labels" . | nindent 4 }}
 spec:
   type: ClusterIP
   ports:
@@ -13,4 +13,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "busybox.selectorLabels" . | nindent 4 }}
+    {{- include "ubuntu.selectorLabels" . | nindent 4 }}

@@ -6,7 +6,7 @@ metadata:
   name: {{ .name }}
   namespace: {{ $.Values.namespace }}
   labels:
-    {{- include "busybox.storage.labels" $ | nindent 4 }}
+    {{- include "ubuntu.storage.labels" $ | nindent 4 }}
   annotations:
     argocd.argoproj.io/sync-wave: "-2"
 spec:
