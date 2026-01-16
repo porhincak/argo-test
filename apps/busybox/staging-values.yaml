@@ -1,8 +1,8 @@
-name: "busybox"
-namespace: "busybox"
+name: "ubuntu"
+namespace: "ubuntu"
 image:
-  repository: "busybox"
-  tag: "latest"
+  repository: "ubuntu"
+  tag: "jammy"
   pullPolicy: "IfNotPresent"
 replicaCount: 1
 #revisionHistoryLimit: 3 # Default value is set to 3 - uncomment and edit if we need more revisions
@@ -10,7 +10,7 @@ limits:
   cpu: 1.0
   memory: 2048Mi
 storages:
-  - name: busybox-test-1
+  - name: ubuntu-test-1
     size: "1Gi"
-  - name: busybox-test-2
+  - name: ubuntu-test-2
     size: "1Gi"
