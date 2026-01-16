@@ -2,7 +2,7 @@ name: "ubuntu"
 namespace: "ubuntu"
 image:
   repository: "ubuntu"
-  tag: "jammy"
+  tag: "noble"
   pullPolicy: "IfNotPresent"
 replicaCount: 1
 #revisionHistoryLimit: 3 # Default value is set to 3 - uncomment and edit if we need more revisions
