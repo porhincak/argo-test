@@ -16,7 +16,7 @@ spec:
     targetRevision: {{ .Values.spec.source.targetRevision }}
     helm:
       valueFiles:
-      - staging-values.yaml
+        - staging-values.yaml
   syncPolicy:
     automated:
       prune: true
