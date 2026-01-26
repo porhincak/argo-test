@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+  namespace: {{ .Chart.Name }}
+  labels:
+    {{- include "ubuntu.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit | default 3 }}
+  selector:
+    matchLabels:
+      {{- include "ubuntu.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "ubuntu.labels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Values.name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}"
+          command:
+            - "sh"
+            - "-c"
+            - |
+              apt-get update; apt-get install -y netcat-openbsd;
+              while true; do
+                echo -e "HTTP/1.1 200 OK\r\nContent-Length: 13\r\n\r\nHello World\n" | nc -l -p 80
+              done
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          resources:
+            limits:
+              cpu: {{ .Values.limits.cpu }}
+              memory: {{ .Values.limits.memory }}
+            requests:
+              cpu: 0
+              memory: 0
+          volumeMounts:
+          {{- range .Values.storages }}
+            - name: {{ .name }}
+              mountPath: /mnt/{{ .name }}
+          {{- end }}
+            - name: block-test
+              mountPath: /mnt/block-test
+            - name: block-test-longhorn
+              mountPath: /mnt/block-test-longhorn
+      volumes:
+      {{- range .Values.storages }}
+        - name: {{ .name }}
+          persistentVolumeClaim:
+            claimName: {{ .name }}
+      {{- end }}
+        - name: block-test
+          persistentVolumeClaim:
+            claimName: block-test
+        - name: block-test-longhorn
+          persistentVolumeClaim:
+            claimName: block-test-longhorn

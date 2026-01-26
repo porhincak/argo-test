@@ -1,0 +1,14 @@
+name: "ubuntu"
+namespace: "ubuntu-ns2"
+image:
+  repository: "ubuntu"
+  tag: "noble"
+  pullPolicy: "IfNotPresent"
+replicaCount: 1
+#revisionHistoryLimit: 3 # Default value is set to 3 - uncomment and edit if we need more revisions
+limits:
+  cpu: 1.0
+  memory: 2048Mi
+  storages:
+    - name: ns2-cloned
+      size: "10Gi"

@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ubuntu-ns2
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: ubuntu-ns2
+    server: {{ .Values.spec.destination.server }}
+  project: default
+  source:
+    path: apps/ubuntu-ns2
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
+    helm:
+      valueFiles:
+        - staging-values.yaml
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

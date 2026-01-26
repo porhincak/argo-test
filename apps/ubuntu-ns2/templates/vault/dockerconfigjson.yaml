@@ -1,0 +1,15 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultStaticSecret
+metadata:
+  name: dockerconfigjson
+  namespace: {{ .Chart.Name }}
+spec:
+  vaultAuthRef: hashicorp-operator/vault-auth
+  mount: kubernetes
+  type: kv-v2
+  path: dockerconfigjson
+  refreshAfter: 60s
+  destination:
+    create: true
+    name: dockerconfigjson
+    type: "kubernetes.io/dockerconfigjson"

@@ -1,0 +1,41 @@
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: ReferenceGrant
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: >-
+      wp-cary-develop:gateway.networking.k8s.io/ReferenceGrant:wp-cary/wp-cary-develop
+  name: ubuntu-ns2-referencegrant
+  namespace: ubuntu
+spec:
+  from:
+    - group: ''
+      kind: PersistentVolumeClaim
+      namespace: ubuntu-ns2
+  to:
+    - group: snapshot.storage.k8s.io
+      kind: VolumeSnapshot
+
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ns2-cloned
+  namespace: {{ $.Values.namespace }}
+  labels:
+    {{- include "ubuntu.storage.labels" $ | nindent 4 }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: rook-cephfs
+  resources:
+    requests:
+      storage: {{ .size }}
+  dataSourceRef:
+    apiGroup: snapshot.storage.k8s.io
+      kind: VolumeSnapshot
+      name: ubuntu-snapshot
+      namespace: ubuntu
