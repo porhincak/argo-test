@@ -16,5 +16,10 @@ spec:
   resources:
     requests:
       storage: {{ .size }}
+  dataSourceRef:
+    apiGroup: snapshot.storage.k8s.io
+    kind: VolumeSnapshot
+    name: ubuntu-snapshot
+    namespace: ubuntu
   #volumeName: {{ .name }}-pv
 {{- end }}
