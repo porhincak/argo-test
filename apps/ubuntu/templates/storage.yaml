@@ -16,21 +16,5 @@ spec:
   resources:
     requests:
       storage: {{ .size }}
-  volumeName: {{ .name }}-pv
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: {{ .name }}-pv
-  annotations:
-    argocd.argoproj.io/sync-wave: "-3"
-spec:
-  capacity:
-    storage: {{ .size }}
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: rook-ceph-block
----
+  #volumeName: {{ .name }}-pv
 {{- end }}
