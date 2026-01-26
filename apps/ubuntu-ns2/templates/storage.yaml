@@ -15,16 +15,12 @@ spec:
   to:
     - group: snapshot.storage.k8s.io
       kind: VolumeSnapshot
-
-
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: ns2-cloned
-  namespace: {{ $.Values.namespace }}
-  labels:
-    {{- include "ubuntu.storage.labels" $ | nindent 4 }}
+  namespace: ubuntu-ns2
   annotations:
     argocd.argoproj.io/sync-wave: "-2"
 spec:
@@ -33,7 +29,7 @@ spec:
   storageClassName: rook-cephfs
   resources:
     requests:
-      storage: {{ .size }}
+      storage: 10Gi
   dataSourceRef:
     apiGroup: snapshot.storage.k8s.io
       kind: VolumeSnapshot
