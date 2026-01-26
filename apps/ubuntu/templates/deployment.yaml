@@ -57,6 +57,7 @@ spec:
         - name: {{ .name }}
           persistentVolumeClaim:
             claimName: {{ .name }}
+      {{- end }}
         - name: block-test
           persistentVolumeClaim:
             claimName: block-test
@@ -66,4 +67,3 @@ spec:
         - name: local-test
           persistentVolumeClaim:
             claimName: local-test
-      {{- end }}
