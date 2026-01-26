@@ -12,7 +12,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: rook-ceph-block
+  storageClassName: rook-cephfs
   resources:
     requests:
       storage: {{ .size }}
