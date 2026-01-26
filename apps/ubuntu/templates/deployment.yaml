@@ -50,8 +50,6 @@ spec:
               mountPath: /mnt/block-test
             - name: block-test-longhorn
               mountPath: /mnt/block-test-longhorn
-            - name: local-test
-              mountPath: /mnt/local-test
       volumes:
       {{- range .Values.storages }}
         - name: {{ .name }}
@@ -64,6 +62,3 @@ spec:
         - name: block-test-longhorn
           persistentVolumeClaim:
             claimName: block-test-longhorn
-        - name: local-test
-          persistentVolumeClaim:
-            claimName: local-test
