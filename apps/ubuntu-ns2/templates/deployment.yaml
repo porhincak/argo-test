@@ -46,19 +46,9 @@ spec:
             - name: {{ .name }}
               mountPath: /mnt/{{ .name }}
           {{- end }}
-            - name: block-test
-              mountPath: /mnt/block-test
-            - name: block-test-longhorn
-              mountPath: /mnt/block-test-longhorn
       volumes:
       {{- range .Values.storages }}
         - name: {{ .name }}
           persistentVolumeClaim:
             claimName: {{ .name }}
       {{- end }}
-        - name: block-test
-          persistentVolumeClaim:
-            claimName: block-test
-        - name: block-test-longhorn
-          persistentVolumeClaim:
-            claimName: block-test-longhorn
