@@ -9,6 +9,3 @@ replicaCount: 1
 limits:
   cpu: 1.0
   memory: 2048Mi
-  storages:
-    - name: ns2-cloned
-      size: "10Gi"

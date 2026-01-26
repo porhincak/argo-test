@@ -42,13 +42,10 @@ spec:
               cpu: 0
               memory: 0
           volumeMounts:
-          {{- range .Values.storages }}
-            - name: {{ .name }}
-              mountPath: /mnt/{{ .name }}
-          {{- end }}
+            - name: cloned
+              mountPath: /mnt/cloned
       volumes:
-      {{- range .Values.storages }}
-        - name: {{ .name }}
+        - name: cloned
           persistentVolumeClaim:
-            claimName: {{ .name }}
-      {{- end }}
+            claimName: ns2-cloned
+
