@@ -11,7 +11,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "-2"
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   storageClassName: rook-cephfs
   resources:
     requests:
