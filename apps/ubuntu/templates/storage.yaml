@@ -18,3 +18,55 @@ spec:
       storage: {{ .size }}
   #volumeName: {{ .name }}-pv
 {{- end }}
+
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: block-test
+  namespace: {{ $.Values.namespace }}
+  labels:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: rook-ceph-block
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: block-test-longhorn
+  namespace: {{ $.Values.namespace }}
+  labels:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn-system
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: local-test
+  namespace: {{ $.Values.namespace }}
+  labels:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-storage
+  resources:
+    requests:
+      storage: 10Gi
