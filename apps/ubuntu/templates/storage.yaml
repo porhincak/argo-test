@@ -12,7 +12,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: longhorn-static-retain
+  storageClassName: rook-ceph-block
   resources:
     requests:
       storage: {{ .size }}
@@ -31,10 +31,6 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: longhorn-static-retain
-  csi:
-    driver: driver.longhorn.io
-    volumeHandle: {{ .name }}
-    fsType: ext4
+  storageClassName: rook-ceph-block
 ---
 {{- end }}
