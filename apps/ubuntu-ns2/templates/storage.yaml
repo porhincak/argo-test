@@ -13,7 +13,7 @@ spec:
   resources:
     requests:
       storage: 10Gi
-  dataSourceRef:
+  dataSource:
     apiGroup: snapshot.storage.k8s.io
     kind: VolumeSnapshot
     name: ubuntu-snapshot
