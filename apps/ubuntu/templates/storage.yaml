@@ -5,8 +5,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ .name }}
   namespace: {{ $.Values.namespace }}
-  labels:
-    {{- include "ubuntu.storage.labels" $ | nindent 4 }}
   annotations:
     argocd.argoproj.io/sync-wave: "-2"
 spec:

@@ -9,8 +9,3 @@ replicaCount: 1
 limits:
   cpu: 1.0
   memory: 2048Mi
-storages:
-  - name: ubuntu-test-1
-    size: "10Gi"
-  - name: ubuntu-test-2
-    size: "1Gi"
